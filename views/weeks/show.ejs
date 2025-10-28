@@ -1,0 +1,56 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+    
+    <div class="blog-post">
+        <h1><%= page.title %></h1>
+
+        <a href="/weeks/">View all weeks</a>
+
+        <div class="column">
+            <label>Week starting:</label>
+            <div><%= week.weekStart %></div>
+        </div>
+
+        <div class="row" style="width: 100%;">
+            <div class="column">
+                <label>Assignments:</label>
+                <div><%- week.assignments %></div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="column">
+                <label>Wins:</label>
+                <div><%- week.wins %></div>
+            </div>
+
+            <div class="column">
+                <label>Struggles:</label>
+                <div><%- week.struggles %></div>
+            </div>
+
+            <div class="column">
+                <label>Improvements:</label>
+                <div><%- week.improvements %></div>
+            </div>
+
+        </div>
+
+        <div class="row blog-control-buttons">
+            <form action="/weeks/<%=week._id%>?_method=DELETE" method="POST">
+                <button type="submit">
+                    Delete
+                </button>
+            </form>
+        
+            <a href="/weeks/<%= week._id %>/edit">
+                <button>Edit</button>
+            </a>
+        </div>
+
+    </div>
+
+
+
+<%- include('../partials/footer') %>

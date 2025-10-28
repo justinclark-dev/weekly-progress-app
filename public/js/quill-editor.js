@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 (main = () => {
 
     const toolbarOptions = [
@@ -7,7 +10,6 @@
     const editAreas = ['assignments', 'wins', 'struggles', 'improvements'];
     const quills = [];
     for (const editArea of editAreas) {
-        console.log('////////////////////////////////////////')
         quills.push(new Quill(`#${editArea}-editor`, {
             theme: 'snow',
             modules: {
@@ -24,7 +26,7 @@
         return date;
     };
 
-    document.getElementById('new-form').onsubmit = function () {
+    document.getElementById('edit-form').onsubmit = function () {
         for (const quill of quills) {
             const content = quill.root.innerHTML;
             switch (quill.container.id) {

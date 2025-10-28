@@ -2,18 +2,18 @@
 <%- include('../partials/header.ejs') %>
 
 <h1><%= page.title %></h1>
-<form id="edit-form" action="/weeks" method="POST">
+<form id="edit-form" action="/weeks/<%=week._id%>?_method=PUT" method="POST">
 
     <div class="column">
         <label for="get-weekstart">Week starting:</label>
-        <input type="date" name="get-weekstart" id="get-weekstart" required />
+        <input type="date" name="get-weekstart" id="get-weekstart" required value="<%= week.weekStart %>"/>
         <input type="hidden" name="weekStart" id="weekstart">
     </div>
 
     <div class="row" style="width: 100%;">
         <div class="column">
             <label for="assignments-editor">Assignments:</label>
-            <div id="assignments-editor"></div>
+            <div id="assignments-editor"><%- week.assignments %></div>
             <input type="hidden" name="assignments" id="assignments-content">
         </div>
     </div>
@@ -22,26 +22,31 @@
 
         <div class="column">
             <label for="wins-editor">Wins:</label>
-            <div id="wins-editor"></div>
+            <div id="wins-editor"><%- week.wins %></div>
             <input type="hidden" name="wins" id="wins-content">
         </div>
 
         <div class="column">
             <label for="struggles-editor">Struggles:</label>
-            <div id="struggles-editor"></div>
+            <div id="struggles-editor"><%- week.struggles %></div>
             <input type="hidden" name="struggles" id="struggles-content">
         </div>
 
         <div class="column">
             <label for="improvements-editor">Improvements:</label>
-            <div id="improvements-editor"></div>
+            <div id="improvements-editor"><%- week.improvements %></div>
             <input type="hidden" name="improvements" id="improvements-content">
         </div>
 
     </div>
 
     <div class="row blog-control-buttons">
-        <button type="submit">Create</button>
+
+        <button type="submit">Update</button>
+
+        <a href="/weeks">
+            <button>Cancel</button>
+        </a>
     </div>
 
 </form>
