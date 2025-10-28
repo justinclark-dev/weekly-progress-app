@@ -2,6 +2,8 @@ const dotenv = require('dotenv');
 dotenv.config({ quiet: true });
 const express = require('express');
 const mongoose = require('mongoose');
+const morgan = require("morgan");
+const path = require("path");
 
 const app = express();
 
@@ -13,6 +15,8 @@ mongoose.connection.on('connected', () => {
 
 // Middlewares
 app.use(express.urlencoded({ extended: false }));
+app.use(morgan("dev"));
+app.use(express.static(path.join(__dirname, "public")));
 
 // Get DB Model
 const Week = require('./models/weeks');

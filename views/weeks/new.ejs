@@ -1,136 +1,49 @@
 <%- include('../partials/head-quill.ejs') %>
-    <%- include('../partials/header.ejs') %>
+<%- include('../partials/header.ejs') %>
 
-        <h1>
-            <%= page.title %>
-        </h1>
-        <form id="new-form" action="/weeks" method="POST">
+<h1><%= page.title %></h1>
+<form id="new-form" action="/weeks" method="POST">
 
-            <div class="column">
-                <label for="get-weekstart">Week starting:</label>
-                <input type="date" name="get-weekstart" id="get-weekstart" required value="2025-10-27"/>
-                <input type="hidden" name="weekStart" id="weekstart">
-            </div>
+    <div class="column">
+        <label for="get-weekstart">Week starting:</label>
+        <input type="date" name="get-weekstart" id="get-weekstart" required value="2025-10-27"/>
+        <input type="hidden" name="weekStart" id="weekstart">
+    </div>
 
-            <div class="column">
-                <label for="assignments-editor">Assignments:</label>
-                <div id="assignments-editor"></div>
-                <input type="hidden" name="assignments" id="assignments-content">
-            </div>
+    <div class="row" style="width: 100%;">
+        <div class="column">
+            <label for="assignments-editor">Assignments:</label>
+            <div id="assignments-editor"></div>
+            <input type="hidden" name="assignments" id="assignments-content">
+        </div>
+    </div>
 
-            <div class="row">
+    <div class="row">
 
-                <div class="column">
-                    assignments-editor
-                    <div id="wins-editor"></div>
-                    <input type="hidden" name="wins" id="wins-content">
-                </div>
+        <div class="column">
+            <label for="wins-editor">Wins:</label>
+            <div id="wins-editor"></div>
+            <input type="hidden" name="wins" id="wins-content">
+        </div>
 
-                <div class="column">
-                    <div id="struggles-editor"></div>
-                    <input type="hidden" name="struggles" id="struggles-content">
-                </div>
+        <div class="column">
+            <label for="struggles-editor">Struggles:</label>
+            <div id="struggles-editor"></div>
+            <input type="hidden" name="struggles" id="struggles-content">
+        </div>
 
-                <div class="column">
-                    <div id="improvements-editor"></div>
-                    <input type="hidden" name="improvements" id="improvements-content">
-                </div>
+        <div class="column">
+            <label for="improvements-editor">Improvements:</label>
+            <div id="improvements-editor"></div>
+            <input type="hidden" name="improvements" id="improvements-content">
+        </div>
 
-            </div>
+    </div>
 
-            <div class="row blog-control-buttons">
-                <button type="submit">Create</button>
-            </div>
+    <div class="row blog-control-buttons">
+        <button type="submit">Create</button>
+    </div>
 
-        </form>
+</form>
 
-        <style>body {background: #111;color: #999;}</style>
-
-
-        <script>
-
-            const toolbarOptions = [
-                ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-                ['blockquote', 'code-block'],
-                ['link', 'image', 'video', 'formula'],
-
-                [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-                [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'list': 'check' }],
-                [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
-                [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
-                [{ 'direction': 'rtl' }],                         // text direction
-
-                [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-
-                [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-                [{ 'font': [] }],
-                [{ 'align': [] }],
-
-                ['clean']                                         // remove formatting button
-            ];
-
-            const assignmentsQuill = new Quill('#assignments-editor', {
-                theme: 'snow',
-                modules: {
-                    toolbar: toolbarOptions
-                }
-            });
-
-            const winsQuill = new Quill('#wins-editor', {
-                theme: 'snow',
-                modules: {
-                    toolbar: toolbarOptions
-                }
-            });
-
-            const strugglesQuill = new Quill('#struggles-editor', {
-                theme: 'snow',
-                modules: {
-                    toolbar: toolbarOptions
-                }
-            });
-
-            const improvementsQuill = new Quill('#improvements-editor', {
-                theme: 'snow',
-                modules: {
-                    toolbar: toolbarOptions
-                }
-            });
-
-            const getISOShortDate = (dateInput) => {
-                /*  Search Assist:
-                    To save a date as an ISO short date in JavaScript, 
-                    you can use the toISOString() method on a Date object, 
-                    which formats the date in the ISO 8601 standard. 
-                    For example: new Date().toISOString().split('T')[0] 
-                    will give you the date in the format "YYYY-MM-DD".  */
-                const date = new Date(dateInput).toISOString().split('T')[0]
-                return date;
-            };
-
-            const weekStart = document.getElementById('weekstart');
-            const getWeekstart = document.getElementById('get-weekstart');
-            
-            document.getElementById('new-form').onsubmit = function () {
-                const assignmentsContent = assignmentsQuill.root.innerHTML;
-                document.getElementById('assignments-content').value = assignmentsContent;
-
-                const winsContent = winsQuill.root.innerHTML;
-                document.getElementById('wins-content').value = winsContent;
-
-                const strugglesContent = strugglesQuill.root.innerHTML;
-                document.getElementById('struggles-content').value = strugglesContent;
-
-                const improvementsContent = improvementsQuill.root.innerHTML;
-                document.getElementById('improvements-content').value = improvementsContent;
-
-                const setTitle = getISOShortDate(getWeekstart.value);
-           
-                getWeekstart.value = setTitle;
-                weekStart.value = setTitle;
-            };
-
-        </script>
-
-        <%- include('../partials/footer.ejs') %>
+<%- include('../partials/footer.ejs') %>
