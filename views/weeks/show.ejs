@@ -1,7 +1,7 @@
 <%- include('../partials/head') %>
 <%- include('../partials/header') %>
     
-    <div class="blog-post">
+    <div class="weekly-report">
         <h1><%= page.title %></h1>
 
         <a href="/weeks/">View all weeks</a>
@@ -37,19 +37,79 @@
 
         </div>
 
-        <div class="row blog-control-buttons">
-            <form action="/weeks/<%=week._id%>?_method=DELETE" method="POST">
-                <button type="submit">
-                    Delete
-                </button>
-            </form>
-        
+        <div class="row form-control-buttons">        
             <a href="/weeks/<%= week._id %>/edit">
                 <button>Edit</button>
             </a>
+
+
+            
+
+            <form id="delete-form" action="/weeks/<%=week._id%>?_method=DELETE" method="POST">
+                <button id="submit-btn" type="submit">
+                    Delete
+                </button>
+            </form>
         </div>
 
     </div>
+
+    <div id="delete-modal">
+        <div class="inner">
+            <p>Are you sure you want to delete this week?</p>
+            <div class="row form-control-buttons">
+                <button id="yes-btn">Yes</button>
+                <button id="no-btn">No</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+                
+                document.getElementById('delete-form').onsubmit = function (event) {
+                    event.preventDefault()
+                    alert('form')
+
+                    // let newDiv = document.createElement('div');
+                    // newDiv.textContent = 'Hello, World!';
+                    // document.body.appendChild(newDiv);
+
+                    // let yesBtn = document.createElement('button');
+                    // yesBtn.textContent = 'Hello, World!';
+                    // document.body.appendChild(yesBtn);
+
+                    // let noBtn = document.createElement('button');
+                    // noBtn.textContent = 'Hello, World!';
+                    // document.body.appendChild(noBtn);
+
+                };
+
+                const deleteForm = document.getElementById('delete-form');
+                const submitBtn = document.getElementById('submit-btn');
+                const deleteModal = document.getElementById('delete-modal');
+                const yesBtn = document.getElementById('yes-btn');
+                const noBtn = document.getElementById('no-btn');
+
+                yesBtn.addEventListener("click", function(event){
+                    deleteForm.submit();
+                });
+
+                noBtn.addEventListener("click", function(event){
+                    deleteModal.classList.remove('show');
+                });
+
+                submitBtn.addEventListener("click", function(event){
+                    event.preventDefault()
+                    
+                    deleteModal.classList.add('show');
+
+                    
+
+                });
+
+
+
+            </script>
 
 
 

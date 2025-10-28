@@ -2,7 +2,7 @@
 <%- include('../partials/header.ejs') %>
 
 <h1><%= page.title %></h1>
-<form id="edit-form" action="/weeks/<%=week._id%>?_method=PUT" method="POST">
+<form id="edit-form" class="weekly-report" action="/weeks/<%=week._id%>?_method=PUT" method="POST">
 
     <div class="column">
         <label for="get-weekstart">Week starting:</label>
@@ -40,7 +40,7 @@
 
     </div>
 
-    <div class="row blog-control-buttons">
+    <div class="row form-control-buttons">
 
         <button type="submit">Update</button>
 
