@@ -22,7 +22,7 @@ const home = async (req, res) => {
     const lastWeek = await Week.find({ weekStart: lastMonday });
     const thisWeek = await Week.find({ weekStart: thisMonday });
     const nextWeek = await Week.find({ weekStart: nextMonday });
-   
+
     res.render('index.ejs', {
         page: { title: 'Home' },
         lastWeek: {
@@ -43,9 +43,9 @@ const home = async (req, res) => {
 // GET /weeks (1)
 const index = async (req, res) => {
     const allWeeks = await Week.find().sort({ weekStart: -1 });
-    res.render('weeks/index.ejs', { 
+    res.render('weeks/index.ejs', {
         page: { title: 'All Weeks' },
-        weeks: allWeeks 
+        weeks: allWeeks
     });
 }
 
@@ -58,8 +58,8 @@ const newItem = (req, res) => {
 
 // GET /weeks/:id (3)
 const showItem = async (req, res) => {
-    const foundWeek = await Week.findById( req.params.id );
-    res.render('weeks/show.ejs', { 
+    const foundWeek = await Week.findById(req.params.id);
+    res.render('weeks/show.ejs', {
         page: { title: 'Weekly Report' },
         week: foundWeek,
         weekStart: formatDate(foundWeek.weekStart)
@@ -68,8 +68,8 @@ const showItem = async (req, res) => {
 
 // POST /weeks (4)
 const createItem = async (req, res) => {
-  await Week.create(req.body);
-  res.redirect('/weeks');
+    await Week.create(req.body);
+    res.redirect('/weeks');
 };
 
 // PUT /weeks/:id (5)
