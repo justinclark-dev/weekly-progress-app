@@ -1,39 +1,49 @@
 <%- include('../partials/head') %>
 <%- include('../partials/header') %>
     
-    <div class="weekly-report">
-        <h1><%= page.title %></h1>
+    <h1><%= page.title %></h1>
 
-        <a href="/weeks/">View all weeks</a>
-
+    <div class="mini-report">
+        
         <div class="column">
-            <label>Week starting:</label>
-            <div><%= week.weekStart %></div>
+            <h2>Week starting:</h2>
+            <div><%= weekStart %></div>
         </div>
 
-        <div class="row" style="width: 100%;">
+        <div class="row col-1">
             <div class="column">
-                <label>Assignments:</label>
-                <div><%- week.assignments %></div>
+                <h2>Assignments:</h2>
+                <div class="editor-locked"><%- week.assignments %></div>
             </div>
         </div>
 
-        <div class="row">
+        <div class="row col-2">
 
             <div class="column">
-                <label>Wins:</label>
-                <div><%- week.wins %></div>
+                <h2>Wins:</h2>
+                <div class="editor-locked" id="wins"><%- week.wins %></div>
             </div>
 
             <div class="column">
-                <label>Struggles:</label>
-                <div><%- week.struggles %></div>
+                <h2>Struggles:</h2>
+                <div class="editor-locked" id="struggles"><%- week.struggles %></div>
             </div>
 
-            <div class="column">
-                <label>Improvements:</label>
-                <div><%- week.improvements %></div>
-            </div>
+            <script>
+                const winsDiv = document.getElementById('wins');
+                const winsHeight = winsDiv.scrollHeight;
+                const strugglesDiv = document.getElementById('struggles');
+                const strugglesHeight = strugglesDiv.scrollHeight;
+                
+                const borderTopBottom = 2; // 1px each, top and bottom
+
+                if (strugglesHeight < winsHeight) {
+                    strugglesDiv.style.height = `${winsHeight + borderTopBottom}px`;
+
+                } else {
+                    winsDiv.style.height = `${strugglesHeight + borderTopBottom}px`;
+                }
+            </script>
 
         </div>
 
@@ -41,12 +51,8 @@
             <a href="/weeks/<%= week._id %>/edit">
                 <button>Edit</button>
             </a>
-
-
-            
-
             <form id="delete-form" action="/weeks/<%=week._id%>?_method=DELETE" method="POST">
-                <button id="submit-btn" type="submit">
+                <button id="submit-delete-btn" type="submit">
                     Delete
                 </button>
             </form>
@@ -57,60 +63,13 @@
     <div id="delete-modal">
         <div class="inner">
             <p>Are you sure you want to delete this week?</p>
-            <div class="row form-control-buttons">
-                <button id="yes-btn">Yes</button>
-                <button id="no-btn">No</button>
+            <div class="row form-control-buttons"> 
+                <button id="confirm-cancel-btn">Cancel</button>
+                <button id="confirm-delete-btn">Delete</button>
             </div>
         </div>
     </div>
 
-    <script>
-                
-                document.getElementById('delete-form').onsubmit = function (event) {
-                    event.preventDefault()
-                    alert('form')
-
-                    // let newDiv = document.createElement('div');
-                    // newDiv.textContent = 'Hello, World!';
-                    // document.body.appendChild(newDiv);
-
-                    // let yesBtn = document.createElement('button');
-                    // yesBtn.textContent = 'Hello, World!';
-                    // document.body.appendChild(yesBtn);
-
-                    // let noBtn = document.createElement('button');
-                    // noBtn.textContent = 'Hello, World!';
-                    // document.body.appendChild(noBtn);
-
-                };
-
-                const deleteForm = document.getElementById('delete-form');
-                const submitBtn = document.getElementById('submit-btn');
-                const deleteModal = document.getElementById('delete-modal');
-                const yesBtn = document.getElementById('yes-btn');
-                const noBtn = document.getElementById('no-btn');
-
-                yesBtn.addEventListener("click", function(event){
-                    deleteForm.submit();
-                });
-
-                noBtn.addEventListener("click", function(event){
-                    deleteModal.classList.remove('show');
-                });
-
-                submitBtn.addEventListener("click", function(event){
-                    event.preventDefault()
-                    
-                    deleteModal.classList.add('show');
-
-                    
-
-                });
-
-
-
-            </script>
-
-
+    <script src="/js/confirm-delete.js"></script>
 
 <%- include('../partials/footer') %>

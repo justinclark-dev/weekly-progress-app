@@ -1,6 +1,87 @@
 <%- include('./partials/head.ejs') %>
 <%- include('./partials/header.ejs') %>
 
-<h1><%= page.title  %></h1>
+    <h1><%= page.title  %></h1>
+
+    <div class="mini-report">
+        <% if (thisWeek.week) { %>
+            
+         <div class="row space-between">  
+            <h2>This Week</h2>      
+            <div class="form-control-buttons">
+                <a href="/weeks/<%= thisWeek.week._id %>">
+                    <button>View</button>
+                </a>
+            </div>
+        </div>
+        
+        <div class="column">
+            <h3>Week starting:</h3>
+            <div><%= thisWeek.monday %></div>
+        </div>
+
+        <div class="row col-1">
+            <div class="column">
+                <h3>Assignments:</h3>
+                <div class="editor-locked"><%- thisWeek.week.assignments %></div>
+            </div>
+        </div>
+
+        <div class="row col-2">
+
+            <div class="column">
+                <h3>Wins:</h3>
+                <div class="editor-locked" id="wins"><%- thisWeek.week.wins %></div>
+            </div>
+
+            <div class="column">
+                <h3>Struggles:</h3>
+                <div class="editor-locked" id="struggles"><%- thisWeek.week.struggles %></div>
+            </div>
+
+            <script>
+                const winsDiv = document.getElementById('wins');
+                const winsHeight = winsDiv.scrollHeight;
+                const strugglesDiv = document.getElementById('struggles');
+                const strugglesHeight = strugglesDiv.scrollHeight;
+                
+                const borderTopBottom = 2; // 1px each, top and bottom
+
+                if (strugglesHeight < winsHeight) {
+                    strugglesDiv.style.height = `${winsHeight + borderTopBottom}px`;
+
+                } else {
+                    winsDiv.style.height = `${strugglesHeight + borderTopBottom}px`;
+                }
+            </script>
+
+        </div>
+
+        <% } %>
+    </div>
+
+    <div class="list">
+        <% if (lastWeek.week) { %>
+        <h3>Last Week:</h3>
+        <%= lastWeek.monday %>
+        <div class="form-control-buttons">
+            <a href="/weeks/<%=lastWeek.week.id%>">
+                <button>View</button>
+            </a>
+        </div>
+        <% } %>
+    </div>
+
+    <div class="list">
+        <% if (nextWeek.week) { %>
+        <h3>Next Week:</h3>
+        <%= nextWeek.monday %>
+        <div class="form-control-buttons">
+            <a href="/weeks/<%=nextWeek.week.id%>">
+                <button>View</button>
+            </a>
+        </div>
+        <% } %>
+    </div>
 
 <%- include('./partials/footer.ejs') %>

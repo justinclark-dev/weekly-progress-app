@@ -3,11 +3,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Flex');
 
 :root {
-    --outter:200px;
-    --inner: 60px;
-    --diff: calc(
-        var(--outter) - var(--inner)
-    )
+    --outter: 200px;
+    --inner: 64px;
+    --diff: calc(var(--outter) - var(--inner))
 }
 
 * {
@@ -17,9 +15,9 @@
 }
 
 html {
-    background-color: #111;
-    color: #999;
-    font-family: 'Roboto Flex', 'Montserrat', system-ui, 'Open Sans', sans-serif;
+    background-color: #090909;
+    color: #888;
+    font-family: 'Montserrat', system-ui, 'Open Sans', sans-serif;
     font-size: large;
 }
 
@@ -31,84 +29,181 @@ body {
 }
 
 main {
-    flex: auto;
-    width: 60%;
+    display: flex;
+    flex: auto !important;
+    flex-direction: column;
+    width: 98%;
     align-self: center;
-    padding: 4rem 0;
+    padding: 1rem 0.5rem;
+    gap: 1.5rem;
+}
+
+
+/*****************************************************************************/
+
+ul {
+    list-style: none;
 }
 
 header {
+    height: var(--inner);
     position: sticky;
-    background-color: #111;
-    height: var(--outter);
-    top: calc(
-        var(--diff) * -1
-    );
+    background-color: #020202;
     display: flex;
     align-items: center;
     justify-content: center;
-    outline: 1px solid #999;
 }
 
-nav {
-    position: sticky;
+.header-inner {
+    padding: 0 0.5rem;
+    margin: 0;
+    width: 98%;
     height: var(--inner);
-    top: 0;
-    width: 60%;
+    position: sticky;
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+/* **** here **** */
+nav {
+    top: var(--inner);
+    position: fixed;
+    left: -100%;
+    width: 80%;
+    height: 100%;
+    overflow: hidden;
+    transition: left 0.5s;
+    background-color: #020202;
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
 }
 
-nav a.logo {
+#hamburger-icon {
+    z-index: 1;
+    right: 0;
+    position: absolute;
+    cursor: pointer;
+}
+
+.line {
+    width: 36px;
+    height: 6px;
+    margin: 6px;
+    background-color: #ffffff;
+}
+
+#hamburger-btn {
+    display: none;
+}
+
+/* Toggle menu icon */
+#hamburger-btn:checked+nav {
+    left: 0;
+    background-color: #070707;
+
+}
+#hamburger-btn:checked+nav ul a  {
+    padding-left: 50px;
+    color: rgb(45, 174, 255);
+    border-bottom: 1px solid #111;
+}
+
+header:has(#hamburger-btn:checked) {
+    top: 0;
+    position: sticky;
+}
+
+
+header a.logo {
     text-decoration: none;
     font-family: 'Fredericka the Great';
     font-weight: 100;
     font-size: 2rem;
     display: flex;
-    align-items: center;   
+    align-items: center;
+
 }
+
+header a.logo .header-logo h1,
+header a.logo .progress-logo-icon {
+    zoom: 60%;
+}
+
 
 nav ul {
     list-style: none;
     display: flex;
-    gap: 20px;
+    flex-direction: column;
     margin: 0;
     justify-items: flex-end;
 }
 
 nav ul a {
-    background-color: #202022;
-    padding: 20px;
+    padding: 0 20px;
+    height: var(--inner);
     display: block;
-    color: #fff;
+    color: #aaa;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+nav ul a:hover {
+    background-color: #191919;
+    color: #999;
     text-decoration: none;
 }
 
-footer {
-    background-color: #111;
-    padding: 30px;
-    text-align: center;
+.header-logo {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    height: var(--inner);
+}
+.header-logo h1 {
+    font-family: 'Fredericka the Great';
+    font-size: 3rem;
+    margin-left: -7px;
+    color: rgba(255, 166, 0, 0.623);
+}
+.progress-logo-icon {
+    width: 64px;
 }
 
+/*****************************************************************************/
+
+footer {
+    background-color: #070707;
+    padding: 30px;
+    text-align: center;
+    font-size: small;
+    
+}
+footer small {
+    font-size: x-small;
+}
 .column {
     display: flex;
     flex-direction: column;
+    flex: 1;
 }
 
-.row {
-    display: flex;
-    flex-direction: row;
-}
 
 a {
-    color: rgb(45, 174, 255);
+    color: #2daeff;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: 'Roboto Flex', 'Montserrat', system-ui, 'Open Sans', sans-serif;
     font-weight: 100;
-    
 }
+
 .hero h1 {
     font-size: 5rem;
 }
@@ -117,14 +212,39 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     flex-direction: column;
 }
+
+.row {
+    display: flex;
+    gap: 1rem;
+}
+
+.col-2 {
+    display: grid;
+    grid-template-rows: 2fr;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+.mini-report,
+.list {
+    display: flex;
+    flex-direction: column;
+}
+
+.mini-report {
+    gap: 1rem;
+}
+
 form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
+
 form input,
 form textarea,
-
 form select,
 form fieldset {
     background-color: #333;
@@ -139,28 +259,27 @@ form .checkbox-div {
     flex-direction: row;
     gap: 0.5rem;
 }
+
 .form-control-buttons {
     display: flex;
     gap: 0.5rem;
     align-self: flex-end;
-    
 }
+
 .form-control-buttons button {
-    /* border: 1px solid #111; */
-    background-color: #111;
-    border: 1px solid #555;
-    color: #999;
+    background-color: #070707;
+    border: 1px solid #1b1b1b;
+    color: #aaa;
     border-radius: 0.25rem;
     font-size: 1rem;
     padding: 0.5rem 2rem;
     display: inline-block;
     cursor: pointer;
     align-self: flex-start;
-
 }
 
 .form-control-buttons button:hover {
-    background-color: #555;
+    background-color: #191919;
     color: #999;
 }
 
@@ -174,11 +293,59 @@ form .checkbox-div {
     min-height: 300px;
 }
 
+.editor-locked {
+    overflow: hidden;
+    min-height: 100px;
+    border: 1px solid #222;
+    padding: 0.3rem 0.5rem;
+}
+.mini-report .editor-locked ul li {
+    padding-left: 1rem;
+}
+.mini-report .editor-locked ul {
+    list-style-type: disc;
+    list-style-position: inside;
+    list-style-image: initial;
+    font-size: smaller;
+}
 /**************************************/
-#submit-btn {
+/* NEW and EDIT form */
+.ql-toolbar.ql-snow,
+.ql-editor.ql-blank,
+.ql-editor {
+    border: 1px solid #777;
+}
+.ql-toolbar.ql-snow {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: none;
+}
+.ql-editor.ql-blank {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.ql-container.ql-snow {
+    border: none;
+}
+input[type="date"] {
+    border: 1px solid #777;
+    background-color: #090909;
+    padding: 5px;
+    border-radius: 5px;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background-color: #777;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+/**************************************/
+#submit-delete-btn:hover,
+#confirm-delete-btn:hover {
     border: 1px solid #ff000080;
 }
-#delete-modal.show  {
+
+#delete-modal.show {
     display: flex;
     flex-direction: column;
     z-index: 1000;
@@ -189,8 +356,9 @@ form .checkbox-div {
     left: 0;
     background-color: rgba(0, 0, 0, 0.8);
     justify-content: center;
-    align-items: center;      
+    align-items: center;
 }
+
 #delete-modal .inner {
     height: 200px;
     width: 600px;
@@ -203,12 +371,122 @@ form .checkbox-div {
     border: 1px solid #777;
     border-radius: 5px;
 }
+
 #delete-modal .form-control-buttons {
     align-self: center;
 }
+
 #delete-modal p {
     font-size: larger;
 }
+
 #delete-modal {
     display: none;
 }
+@media (max-width: 639px) {
+    .header-logo {
+        zoom: 55%;
+    }
+}
+@media (min-width: 640px) {
+
+
+    main {
+        width: 90%;
+        padding: 4rem 0;
+    }
+    .header-inner {
+        width: 90%;
+    }
+
+    header,
+    .header-inner {
+        height: var(--outter);
+        top: calc(var(--diff) * -1);
+    }
+
+    #menu {
+        display: flex;
+        gap: 16px;
+    }
+
+    #hamburger-icon {
+        display: none;
+    }
+
+    /* **** here **** */
+    nav {
+        position: sticky;
+        display: flex;
+        flex-direction: row;
+        top: 0;
+        height: var(--inner);
+        overflow: visible;
+        padding-top: 0;
+        left: inherit;
+        transition: left 0.5s;
+        justify-content: flex-end;
+    }
+
+    .header-inner .logo {
+        position: sticky;
+        top: 0;
+        height: var(--inner);
+    }
+ 
+
+    nav ul {
+        gap: 20px;
+        flex-direction: row;
+    }
+
+    nav a {
+        background-color: #202022;
+        background-color: #101011;
+        background-color: #070707;
+        background-color: #090909;
+    }
+
+    .row {
+        flex-direction: row;
+    }
+
+    .mini-report,
+    .list {
+        border: 1px solid #222;
+        border-radius: 5px;
+        padding: 1rem 2rem;
+    }
+
+    .list {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 2rem;
+    }
+
+    .col-2 {
+        grid-template-rows: 1fr;
+        grid-template-columns: 50% 50%;
+    }
+
+}
+
+@media (min-width: 1024px) {
+    main,
+    .header-inner {
+        width: 80%;
+    }
+    
+}
+
+@media (min-width: 1200px) {
+    main,
+    .header-inner {
+        width: 60%;
+    }
+}
+
+
+
+/*****************************************************************************/

@@ -1,5 +1,5 @@
 /**
- * 
+ * Handles both EDIT and NEW ejs templates.
  */
 (main = () => {
 
@@ -7,7 +7,7 @@
         [ 'bold', 'italic', 'underline', 'link', 'image', { 'list': 'bullet' }, 'clean' ]
     ];
 
-    const editAreas = ['assignments', 'wins', 'struggles', 'improvements'];
+    const editAreas = ['assignments', 'wins', 'struggles'];
     const quills = [];
     for (const editArea of editAreas) {
         quills.push(new Quill(`#${editArea}-editor`, {
@@ -16,17 +16,18 @@
                 toolbar: toolbarOptions
             }
         }));
-        console.log(`quill created`)
+        console.log(`quill created`);
     }
 
     const getISOShortDate = (dateInput) => {
         // Gets the ISO date string without the time, 
         // gives us the date in the format "YYYY-MM-DD".
-        const date = new Date(dateInput).toISOString().split('T')[0]
+        const date = new Date(dateInput).toISOString().split('T')[0];
         return date;
     };
 
-    document.getElementById('edit-form').onsubmit = function () {
+    document.getElementById('edit-form').onsubmit = function (event) {
+        
         for (const quill of quills) {
             const content = quill.root.innerHTML;
             switch (quill.container.id) {
@@ -38,9 +39,6 @@
                     break;
                 case 'struggles-editor':
                     document.getElementById(`struggles-content`).value = content;
-                    break;
-                case 'improvements-editor':
-                    document.getElementById(`improvements-content`).value = content;
                     break;
             }
         }

@@ -32,21 +32,11 @@
             <input type="hidden" name="struggles" id="struggles-content">
         </div>
 
-        <div class="column">
-            <label for="improvements-editor">Improvements:</label>
-            <div id="improvements-editor"><%- week.improvements %></div>
-            <input type="hidden" name="improvements" id="improvements-content">
-        </div>
-
     </div>
 
     <div class="row form-control-buttons">
-
         <button type="submit">Update</button>
-
-        <a href="/weeks">
-            <button>Cancel</button>
-        </a>
+        <button type="button" onclick="window.location.href='/weeks/<%=week._id%>'">Cancel</button>
     </div>
 
 </form>
